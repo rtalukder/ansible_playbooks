@@ -1,0 +1,53 @@
+--- # Deploying VD Bench on a slave node                                               
+                                                                                       
+- hosts: vdbench_node                                                                  
+  user: root                                                                           
+  sudo: yes                                                                            
+  gather_facts: yes                                                                    
+  connection: ssh                                                                      
+  tasks:                                                                               
+    - name: Change hostname                                                            
+      hostname: name=vdb-node09                                                        
+                                                                                       
+    - name: Upgrade/update system before installing packages                           
+      yum: name=* state=latest                                                         
+                                                                                       
+    - name: Download packages                                                          
+      yum:                                         
+        name:                                                                     
+          - vim
+          - ntp
+          - unzip
+          - java-1.8.0-openjdk
+          - net-tools
+          - iotop
+        state: latest                                                                        
+                                                                                       
+    - name: Echo 'vdb-master' into /etc/hosts                                          
+      shell: echo "10.250.146.160 vdb-master" >> /etc/hosts                            
+                                                                                       
+    - name: Copy vdbench.zip binaries into home directory                              
+      copy: src=/root/vdbench50407.zip dest=/root/                           
+                                                                                       
+    - name: Create vdbench/ directory                                                  
+      file: path=/root/vdbench/ state=directory owner=root group=root mode=0755    
+                                                                                       
+    - name: Unzip VD Bench into /root/vdbench
+      unarchive: src=/root/vdbench50407.zip dest=/root/vdbench/
+                                                                                       
+    - name: Start and enable the NTP service                                           
+      service: name=ntpd state=started enabled=yes
+
+    # - name: Enable the NTP service                                                   
+    #   service: name=ntpd enabled=yes 
+
+    - name: Stop and disable the firewalld service                                 
+      service: name=firewalld state=stopped enabled=no                                                         
+    # - name: Disable the firewalld service                                            
+    #   service: name=firewalld enabled=no 
+
+    - name: Disable SELinux                                                            
+      selinux: state=disabled 
+
+    - name: Unconditionally reboot the machine with all defaults
+      reboot:

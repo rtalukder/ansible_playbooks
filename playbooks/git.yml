@@ -1,0 +1,11 @@
+--- # Git - Playbook Example
+
+- hosts: apacheweb
+  user: test
+  # important not to use sudo - otherwise will try to login as root
+  sudo: no
+  gather_facts: yes
+  connection: ssh
+  tasks:
+    - name: Checking out a git repo on the remote server
+      git: repo=ssh://test@rtalukder1c/home/test/testrepo dest=/home/test/gitrepo

@@ -1,0 +1,14 @@
+--- # AptRepo + AptKey - Playbook Example
+
+- hosts: ubuntu
+  user: test
+  sudo: yes
+  gather_facts: yes
+  connection: ssh
+  tasks:
+    - name: install a dependency needed for apt-repo
+      apt: pkg=python-apt state=latest
+    - name: Add GPG repo key
+      apt_key: url=https://dl.google.com/linux/linux_signing_key.pub state=present
+    - name: Add the Google repo for ubuntu
+      apt_repository: repo='deb http://dl.google.com/linux/deb/ stable main non-free' state=present

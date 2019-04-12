@@ -1,0 +1,15 @@
+--- # Testing J2 Template Module - Playbook Example
+
+- hosts: redhat:ubuntu
+  user: test
+  sudo: yes
+  gather_facts: yes
+  connection: ssh
+  vars:
+    userName: test
+    userPassword: password123
+    connectionType: SFTP
+  tasks:
+    - name: Install the configurationfile customized for the system
+      template: src=/home/test/ansible_playbooks/include/test.conf.j2 dest=/home/test/test.conf owner=test group=test mode=0750
+

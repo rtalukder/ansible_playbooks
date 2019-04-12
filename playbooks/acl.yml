@@ -1,0 +1,12 @@
+--- # ACL - Playbook Example
+
+- hosts: all
+  user: test
+  sudo: yes
+  gather_facts: yes
+  connection: ssh
+  tasks:
+    - name: Get the ACL information on the /etc/groups file
+      acl: name=/etc/group
+      register: acl_info
+    - debug: var=acl_info
