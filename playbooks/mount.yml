@@ -1,0 +1,12 @@
+--- # Filesystem - Playbook Example
+
+- hosts: appserver
+  user: test
+  sudo: yes
+  gather_facts: yes
+  connection: ssh
+  tasks:
+    - name: mount formatted device somewhere 
+      mount: name=/mnt/mymount src=/dev/xvda1 fstype=xfs state=present
+    # mount: src='LABEL=SOME_LABEL'
+    # mount: src='UUID=adfjaskfh12764238gaqer'

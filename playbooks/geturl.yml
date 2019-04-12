@@ -1,0 +1,9 @@
+--- # Get URL - Playbook Example
+
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  connection: ssh
+  tasks:
+    - name: Get INI file from webserver
+      get_url: url=http://rtalukder2c.mylabserver.com/mytest.ini dest=/home/test/mytest.ini mode=0440

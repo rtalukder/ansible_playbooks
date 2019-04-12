@@ -1,0 +1,9 @@
+--- # Cron - Playbook Example
+
+- hosts: apacheweb
+  user: test
+  gather_facts: yes
+  connection: ssh
+  tasks:
+    - name: Add CRON job to the test user
+      cron: name="list files" minute="0" hour="1" job="ls -al /etc > /home/test/cronresult.log"

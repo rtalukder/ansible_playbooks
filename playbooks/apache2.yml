@@ -1,0 +1,11 @@
+--- # Apache2 - Playbook Example
+
+- hosts: ubuntu
+  user: test
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Disable the alias module in Apache2
+      apache2_module: state=present name=alias
+

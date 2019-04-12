@@ -1,0 +1,12 @@
+--- # Ping - Playbook Example
+
+- hosts: all
+  user: test
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Ping all the hosts
+      ping:
+      register: response
+    - debug: var=response

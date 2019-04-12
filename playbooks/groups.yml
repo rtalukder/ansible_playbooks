@@ -1,0 +1,10 @@
+--- # Group - Playbook Example
+
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  gather_facts: yes
+  connection: ssh
+  tasks:
+    - name: add new Group
+      group: name=newgroup state=absent

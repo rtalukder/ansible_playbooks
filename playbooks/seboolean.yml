@@ -1,0 +1,10 @@
+--- # SEBoolean - Playbook Example
+
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Changing boolean for anonymous writes on the webserver
+      seboolean: name=httpd_anon_write state=yes 

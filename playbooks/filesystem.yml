@@ -1,0 +1,10 @@
+--- # Filesystem - Playbook Example
+
+- hosts: appserver
+  user: test
+  sudo: yes
+  gather_facts: yes
+  connection: ssh
+  tasks:
+    - name: format the remote data partition
+      filesystem: fstype=xfs dev=/dev/xvda1 opts="-cc"

@@ -1,0 +1,11 @@
+--- # SELinux - Playbook Example
+
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Changing SELinux configuration to disabled
+      selinux: state=disabled
+    # selinux: policy=targeted state=permissive

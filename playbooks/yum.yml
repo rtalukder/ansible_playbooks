@@ -1,0 +1,10 @@
+--- # Yum - Playbook Example
+
+- hosts: all
+  user: test
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Install Apache webserver
+      yum: pkg=dnf state=installed

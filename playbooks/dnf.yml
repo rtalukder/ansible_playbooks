@@ -1,0 +1,10 @@
+--- # DNF - Playbook Example
+
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Install apache web server with DNF
+      dnf: name=* state=latest

@@ -1,0 +1,10 @@
+--- # Script - Playbook Example
+
+- hosts: appserver
+  user: test
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: run Script
+      script: /home/test/system_uptime.sh creates=/home/test/uptime.log

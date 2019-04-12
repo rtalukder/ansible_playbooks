@@ -1,0 +1,13 @@
+--- # Delegate to function - Playbook Example
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Run a remote ping on the application server
+      command: ping -c 10 rtalukder3c > /home/test/ping.out
+      delegate_to: 127.0.0.1
+    - name: Install a package
+      yum: pkg=lynx state=latest
+    

@@ -1,0 +1,16 @@
+--- # Mail - Playbook Example
+
+- hosts: ubuntu
+  user: test
+  # we want to send the mail from the user 'test' and not root
+  sudo: no
+  gather_facts: yes
+  connection: ssh
+  tasks:
+    - name: send an email to test user indicated build completion
+      mail:
+        host='localhost'
+        port=25
+        to='test'
+        subject='playbook is done'
+        body='the playbook has completed running. system {{ ansible_hostname }} has been successfully deployed'

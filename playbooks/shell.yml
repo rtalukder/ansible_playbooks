@@ -1,0 +1,13 @@
+--- # Shell - Playbook Example
+
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Executing a remote command - uptime
+      shell: /usr/bin/uptime >> /home/test/uptime.log
+      args:
+        chdir: logs/
+        creates: uptime.log

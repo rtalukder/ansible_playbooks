@@ -1,0 +1,13 @@
+--- # Testing the J2 (jinja) Template Module
+- hosts: apacheweb:appserver
+  user: test
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  vars:
+    username: test
+    userPassword: password123
+    connection: SFTP
+  tasks:
+    - name: Install the configuration file customized for the system
+      template: src=test.conf.j2 dest=/home/test/test.conf owner=test group=test mode=750

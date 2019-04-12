@@ -1,0 +1,16 @@
+--- # Stat - Playbook Example
+
+- hosts: appserver
+  user: test
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  vars:
+    playbook_version: 0.1
+  tasks:
+    - name: Find out if a file/directory in a path exist or not?
+      stat: path=/home/test/abc
+        register: p
+    - debug: msg="Path exists and is a directory"
+        when: p.stat.isdir is defined and p.stat.isdir
+

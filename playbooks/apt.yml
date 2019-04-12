@@ -1,0 +1,14 @@
+--- # Apt - Playbook Example
+
+- hosts: ubuntu
+  user: test
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Install Apache2 webserver - Debian
+      apt: name=apache2 state=present
+    - name: Equivalent of apt-get update
+      apt: update_cache=yes
+    - name: Equivalent of apt-get upgrade
+      apt: upgrade=dist

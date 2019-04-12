@@ -1,0 +1,10 @@
+--- # Unarchieve - Playbook Example
+
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Copy and unarchive a file
+      unarchive: src=/home/test/test.tar.gz dest=/home/test/unarchive

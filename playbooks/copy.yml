@@ -1,0 +1,16 @@
+--- # Copy - Playbook Example
+
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Copy from the files directory test files
+      copy: src=/home/test/files/test1.txt dest=/home/test/test1.txt
+    - name: Copy test2 files
+      copy: src=/home/test/files/test2.txt dest=/home/test/test2.txt mode=0777
+    - name: Copy test3 file
+      copy: src=/home/test/files/test3.txt dest=/home/test/test3.txt mode=0655 owner=test group=test
+    - name: Copy test4 file
+      copy: src=/home/test/files/test4.txt dest=/home/test/test4.txt mode=0777 backup=yes

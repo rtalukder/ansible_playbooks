@@ -1,0 +1,12 @@
+--- # Command - Playbook Example
+
+- hosts: ubuntu
+  user: test
+  sudo: yes
+  gather_facts: yes
+  connection: ssh
+  tasks:
+    - name: Check for python packages
+      command: /home/test/testing/test.sh
+      args:
+        chdir: /home/test/testing

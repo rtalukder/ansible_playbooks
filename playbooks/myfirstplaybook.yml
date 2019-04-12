@@ -1,0 +1,35 @@
+--- # My First YAML Playbook for Ansible
+
+## Target Section ##
+
+- hosts: all
+  user: test
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+
+## Variables Section ##   
+
+  vars:
+    playbook_version: 0.1b
+  vars_files:
+    - /home/test/conf/copyright.yml
+    - /home/test/conf/webdefaults.yml
+  vars_prompt:
+    - name: pkg_name
+      prompt: Install which package?
+
+## Tasks Section ##
+  
+  tasks:
+    - name: Install Apache Webserver
+      action: yum name=httpd state=installed
+      notify: Restart HTTPD
+    - name: Install the Lynx Web Browser
+      action: yum name={{ pkg_lynx }} state=installed
+
+## Handler Section ##
+
+  handlers:
+    - name: Restart HTTPD
+      action: service name=httpd state=restarted

@@ -1,0 +1,12 @@
+--- # User - Playbook Example
+
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Add the user called testapache
+      user: name=testapache comment="Test Apache" shell=/bin/bash
+    - name: Remove the user called testapache2
+      user: name=testapache2 state=absent remove=yes

@@ -1,0 +1,16 @@
+--- # Debug - Playbook Example
+
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Install web server
+      yum: name=httpd state=installed
+    # Will it output to stdout
+    - debug: msg="Equivalent of sudo yum install httpd"
+    - name: System uptime
+      shell: /usr/bin/uptime
+      register: result
+    - debug: var=result

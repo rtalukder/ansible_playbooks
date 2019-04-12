@@ -1,0 +1,10 @@
+--- # Fetch - Playbook Example
+
+- hosts: all
+  user: test
+  sudo: yes
+  gather_facts: yes
+  connection: ssh
+  tasks:
+    - name: Copy remote hosts file to control server
+      fetch: src=/etc/hosts dest=/home/test/prefix-{{ ansible_hostname }} flat=yes
