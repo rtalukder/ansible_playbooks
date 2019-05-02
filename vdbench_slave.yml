@@ -7,7 +7,7 @@
   connection: ssh                                                                      
   tasks:                                                                               
     - name: Change hostname                                                            
-      hostname: name=vdb-node09                                                        
+      hostname: name=vdb-node01                                                        
                                                                                        
     - name: Upgrade/update system before installing packages                           
       yum: name=* state=latest                                                         
@@ -21,6 +21,7 @@
           - java-1.8.0-openjdk
           - net-tools
           - iotop
+          - open-vm-tools
         state: latest                                                                        
                                                                                        
     - name: Echo 'vdb-master' into /etc/hosts                                          
@@ -34,7 +35,10 @@
                                                                                        
     - name: Unzip VD Bench into /root/vdbench
       unarchive: src=/root/vdbench50407.zip dest=/root/vdbench/
-                                                                                       
+                      
+    - name: Set timezone to America/Chicago
+      timezone: name=America/Chicago
+
     - name: Start and enable the NTP service                                           
       service: name=ntpd state=started enabled=yes
 
